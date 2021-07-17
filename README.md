@@ -26,17 +26,8 @@ Add a JSON file per language you support in an asset `path` and describe it in y
 ```yaml
 flutter:
   assets:
-    - {path}/{languageCode}.yaml
+    - assets/json_translations/
 ```
-
-Or using a combination of language and country code
-
-```yaml
-flutter:
-  assets:
-    - {path}/{languageCode-countryCode}.yaml
-```
-
 
 The JSON file name must match exactly the combination of language and country code described in `supportedLocales`.
 
@@ -50,7 +41,7 @@ That is `Locale('en', 'US')` must have a corresponding `assetPath/en-US.json` fi
 	"hello": "hello",
 	"bye": "bye",
 	"items": [ "one", "two", "three" ],
-  "count": 1
+	"count": 1
 }
 ```
 
