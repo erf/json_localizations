@@ -4,7 +4,7 @@ A minimal [JSON](https://en.wikipedia.org/wiki/JSON) localization package for Fl
 
 Use a JSON object / file per language to represent key / value pairs for localizing your app.
 
-Also consider [toml_localizations](https://github.com/erf/toml_localizations), with a better string support, or [csv_localizations](https://github.com/erf/csv_localizations) for multi language support in a single file.
+Also consider [toml_localizations](https://github.com/erf/toml_localizations), [yaml_localizations](https://github.com/erf/yaml_localizations) and [csv_localizations](https://github.com/erf/csv_localizations).
 
 ## Usage
 
