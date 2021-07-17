@@ -16,10 +16,7 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
-        JsonLocalizationsDelegate(
-          'assets/json_translations',
-          DefaultAssetBundle.of(context),
-        ),
+        JsonLocalizationsDelegate('assets/json_translations'),
       ],
       supportedLocales: const <Locale>[
         Locale('en'),
