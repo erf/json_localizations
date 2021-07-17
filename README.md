@@ -1,14 +1,107 @@
 # json_localizations
 
-A new Flutter package project.
+A minimal [JSON](https://en.wikipedia.org/wiki/JSON) localization package for Flutter.
 
-## Getting Started
+Use a JSON object / file per language to represent key / value pairs for localizing your app.
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+Also consider [toml_localizations](https://github.com/erf/toml_localizations), with a better string support, or [csv_localizations](https://github.com/erf/csv_localizations) for multi language support in a single file.
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+## Usage
+
+See [example](example).
+
+### Install
+
+Add to your `pubspec.yaml`
+
+```yaml
+dependencies:
+  json_localizations:
+```
+
+### Add a JSON file per language
+
+Add a JSON file per language you support in an asset `path` and describe it in your `pubspec.yaml`
+
+```yaml
+flutter:
+  assets:
+    - {path}/{languageCode}.yaml
+```
+
+Or using a combination of language and country code
+
+```yaml
+flutter:
+  assets:
+    - {path}/{languageCode-countryCode}.yaml
+```
+
+
+The JSON file name must match exactly the combination of language and country code described in `supportedLocales`.
+
+That is `Locale('en', 'US')` must have a corresponding `assetPath/en-US.json` file.
+
+
+##### Example JSON file
+
+```json
+{
+	"hello": "hello",
+	"bye": "bye",
+	"items": [ "one", "two", "three" ],
+  "count": 1
+}
+```
+
+> Tip: You can store any json type given a key, like a string, an array of strings, or a number
+
+### MaterialApp
+
+Add `JsonLocalizationsDelegate` to `MaterialApp` and set `supportedLocales` using language/country codes.
+
+```
+MaterialApp(
+  localizationsDelegates: [
+    ... // global delegates
+    JsonLocalizationsDelegate('assets/json_translations'),
+  ],
+  supportedLocales: [
+    Locale('en'),
+    Locale('nb'),
+  ],
+}
+
+```
+
+### API
+
+Translate strings or a list of strings using `value`:
+
+```dart
+JsonLocalizations.of(context)?.value('hello')
+```
+
+We keep the API simple, but you can easily add an extension method to `String` like this:
+
+```dart
+extension LocalizedString on String {
+  String tr(BuildContext context) => JsonLocalizations.of(context)!.value(this);
+}
+```
+
+### Note on **iOS**
+
+Add supported languages to `ios/Runner/Info.plist` as described 
+[here](https://flutter.dev/docs/development/accessibility-and-localization/internationalization#specifying-supportedlocales).
+
+Example:
+
+```
+<key>CFBundleLocalizations</key>
+<array>
+	<string>en-GB</string>
+	<string>en</string>
+	<string>nb</string>
+</array>
+```

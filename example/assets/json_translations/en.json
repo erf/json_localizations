@@ -1,0 +1,10 @@
+{
+	"hello": "hello",
+	"bye": "bye",
+	"items": [
+		"one",
+		"two",
+		"three"
+	],
+	"count": 1
+}

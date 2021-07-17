@@ -17,11 +17,11 @@ class JsonLocalizations {
   /// a hash key of language / country code used for [_translationsMap]
   late String _codeKey;
 
-  /// initialize with asset path to yaml files and an optional assetBundle
+  /// initialize with asset path to JSON files and an optional assetBundle
   JsonLocalizations(this.assetPath, [assetBundle])
       : assetBundle = assetBundle ?? rootBundle;
 
-  /// load and cache a yaml file per language / country code
+  /// load and cache a JSON file per language / country code
   Future<JsonLocalizations> load(Locale locale) async {
     final languageCode = locale.languageCode;
     final countryCode = locale.countryCode;
@@ -50,7 +50,7 @@ class JsonLocalizations {
     if (_codeKey != languageCode) {
       _codeKey = languageCode;
       try {
-        final text = await assetBundle.loadString('$assetPath/$_codeKey.yaml');
+        final text = await assetBundle.loadString('$assetPath/$_codeKey.json');
         _translations[_codeKey] = json.decode(text);
         return this;
       } catch (e) {
