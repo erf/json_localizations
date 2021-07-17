@@ -1,5 +1,5 @@
 name: json_localizations
-description: A minimal YAML localization package built on LocalizationsDelegate.
+description: A minimal JSON localization package built on LocalizationsDelegate.
 version: 0.1.0
 homepage: https://github.com/erf/json_localizations
 
