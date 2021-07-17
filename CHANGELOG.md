@@ -1,2 +1,2 @@
-## [0.1.0] - 18 july 2021
+## [0.2.0] - 18 july 2021
 - initial release
