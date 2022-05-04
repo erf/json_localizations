@@ -23,14 +23,8 @@ class JsonLocalizations {
 
   /// load and cache a JSON file per language / country code
   Future<JsonLocalizations> load(Locale locale) async {
-    final languageCode = locale.languageCode;
-    final countryCode = locale.countryCode;
-
-    if (countryCode != null && countryCode.isNotEmpty) {
-      _codeKey = '$languageCode-$countryCode';
-    } else {
-      _codeKey = languageCode;
-    }
+    // get the key from a combination of languageCode and countryCode
+    _codeKey = locale.toLanguageTag();
 
     // in cache already
     if (_translations.containsKey(_codeKey)) {
@@ -47,8 +41,8 @@ class JsonLocalizations {
     }
 
     // load only language code
-    if (_codeKey != languageCode) {
-      _codeKey = languageCode;
+    if (_codeKey != locale.languageCode) {
+      _codeKey = locale.languageCode;
       try {
         final text = await assetBundle.loadString('$assetPath/$_codeKey.json');
         _translations[_codeKey] = json.decode(text);
