@@ -58,15 +58,7 @@ class JsonLocalizations {
   }
 
   /// Get translation given a key.
-  dynamic value(String key) {
-    final containsLocale = _translations.containsKey(_codeKey);
-    assert(containsLocale, 'Missing translation for code: $_codeKey');
-    final jsonObject = _translations[_codeKey]!;
-    final containsKey = jsonObject.containsKey(key);
-    assert(containsKey, 'Missing localization for key: $key');
-    final translatedValue = jsonObject[key];
-    return translatedValue;
-  }
+  dynamic value(String key) => _translations[_codeKey]![key];
 
   /// Helper for getting [JsonLocalizations] object.
   static JsonLocalizations? of(BuildContext context) =>
