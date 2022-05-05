@@ -15,7 +15,7 @@ class JsonLocalizations {
   final AssetBundle assetBundle;
 
   /// A hash key of language / country code used for [_translationsMap].
-  late String _codeKey;
+  late String _langTag;
 
   /// Initialize with asset path to JSON files and an optional assetBundle.
   JsonLocalizations(this.assetPath, [assetBundle])
@@ -24,41 +24,41 @@ class JsonLocalizations {
   /// Load and cache a JSON file per language / country code.
   Future<JsonLocalizations> load(Locale locale) async {
     // get the key from a combination of languageCode and countryCode
-    _codeKey = locale.toLanguageTag();
+    _langTag = locale.toLanguageTag();
 
     // in cache already
-    if (_translations.containsKey(_codeKey)) {
+    if (_translations.containsKey(_langTag)) {
       return this;
     }
 
     // load combined key of languageCode and countryCode
     try {
-      final text = await assetBundle.loadString('$assetPath/$_codeKey.json');
-      _translations[_codeKey] = json.decode(text);
+      final text = await assetBundle.loadString('$assetPath/$_langTag.json');
+      _translations[_langTag] = json.decode(text);
       return this;
     } catch (e) {
       debugPrint(e.toString());
     }
 
     // load only language code
-    if (_codeKey != locale.languageCode) {
-      _codeKey = locale.languageCode;
+    if (_langTag != locale.languageCode) {
+      _langTag = locale.languageCode;
       try {
-        final text = await assetBundle.loadString('$assetPath/$_codeKey.json');
-        _translations[_codeKey] = json.decode(text);
+        final text = await assetBundle.loadString('$assetPath/$_langTag.json');
+        _translations[_langTag] = json.decode(text);
         return this;
       } catch (e) {
         debugPrint(e.toString());
       }
     }
 
-    assert(false, 'Translation file not found for code \'$_codeKey\'');
+    assert(false, 'Translation file not found for code \'$_langTag\'');
 
     return this;
   }
 
   /// Get translation given a key.
-  dynamic value(String key) => _translations[_codeKey]![key];
+  dynamic value(String key) => _translations[_langTag]![key];
 
   /// Helper for getting [JsonLocalizations] object.
   static JsonLocalizations? of(BuildContext context) =>
