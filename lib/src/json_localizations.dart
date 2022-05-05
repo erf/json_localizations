@@ -3,25 +3,25 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-/// store translations per languageCode/country from a JSON object used by [JsonLocalizationsDelegate]
+/// Store translations per languageCode/country from a JSON object used by [JsonLocalizationsDelegate].
 class JsonLocalizations {
-  /// map of translations per language/country code hash
+  /// Map of translations per language/country code hash.
   final Map<String, dynamic> _translations = {};
 
-  /// path to translation assets
+  /// Path to translation assets.
   final String assetPath;
 
-  /// the asset bundle
+  /// The asset bundle.
   final AssetBundle assetBundle;
 
-  /// a hash key of language / country code used for [_translationsMap]
+  /// A hash key of language / country code used for [_translationsMap].
   late String _codeKey;
 
-  /// initialize with asset path to JSON files and an optional assetBundle
+  /// Initialize with asset path to JSON files and an optional assetBundle.
   JsonLocalizations(this.assetPath, [assetBundle])
       : assetBundle = assetBundle ?? rootBundle;
 
-  /// load and cache a JSON file per language / country code
+  /// Load and cache a JSON file per language / country code.
   Future<JsonLocalizations> load(Locale locale) async {
     // get the key from a combination of languageCode and countryCode
     _codeKey = locale.toLanguageTag();
@@ -57,7 +57,7 @@ class JsonLocalizations {
     return this;
   }
 
-  /// get translation given a key
+  /// Get translation given a key.
   dynamic value(String key) {
     final containsLocale = _translations.containsKey(_codeKey);
     assert(containsLocale, 'Missing translation for code: $_codeKey');
@@ -68,7 +68,7 @@ class JsonLocalizations {
     return translatedValue;
   }
 
-  /// helper for getting [JsonLocalizations] object
+  /// Helper for getting [JsonLocalizations] object.
   static JsonLocalizations? of(BuildContext context) =>
       Localizations.of<JsonLocalizations>(context, JsonLocalizations);
 }
@@ -81,7 +81,7 @@ class JsonLocalizationsDelegate
   JsonLocalizationsDelegate(String path, [AssetBundle? assetBundle])
       : localization = JsonLocalizations(path, assetBundle);
 
-  /// we expect all supportedLocales to have asset files
+  /// We expect all supportedLocales to have asset files.
   @override
   bool isSupported(Locale locale) => true;
 
