@@ -72,4 +72,14 @@ void main() {
     final hiFinder = find.text('Hi en-US');
     expect(hiFinder, findsOneWidget);
   });
+
+  test('Locale get codeKey from languageCode', () {
+    expect(const Locale('en').toLanguageTag(), 'en');
+    expect(const Locale('nb').toLanguageTag(), 'nb');
+  });
+
+  test('Locale get codeKey from languageCode and country', () {
+    expect(const Locale('en', 'US').toLanguageTag(), 'en-US');
+    expect(const Locale('en', 'GB').toLanguageTag(), 'en-GB');
+  });
 }
