@@ -1,3 +1,6 @@
+## [0.5.0] - 6 dec 2023
+- update sdk env and lints
+
 ## [0.4.0] - 6 may 2022
 - use locale.toLanguageTag
 - improve DOCS
