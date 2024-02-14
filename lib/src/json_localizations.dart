@@ -68,7 +68,7 @@ class JsonLocalizationsDelegate
     extends LocalizationsDelegate<JsonLocalizations> {
   final JsonLocalizations localization;
 
-  JsonLocalizationsDelegate(String path, [AssetBundle? assetBundle])
+  JsonLocalizationsDelegate({required String path, AssetBundle? assetBundle})
       : localization = JsonLocalizations(path, assetBundle);
 
   /// We expect all supportedLocales to have asset files.

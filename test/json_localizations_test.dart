@@ -29,11 +29,9 @@ Widget buildTestWidgetWithLocale(Locale locale) {
   return MaterialApp(
     locale: locale,
     localizationsDelegates: [
-      JsonLocalizationsDelegate(
-        'assets/json_translations',
-        TestAssetBundle(),
-      ),
       ...GlobalMaterialLocalizations.delegates,
+      JsonLocalizationsDelegate(
+          path: 'assets/json_translations', assetBundle: TestAssetBundle()),
     ],
     supportedLocales: const [
       Locale('en'),

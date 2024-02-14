@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       localizationsDelegates: [
         ...GlobalMaterialLocalizations.delegates,
-        JsonLocalizationsDelegate('assets/json_translations'),
+        JsonLocalizationsDelegate(path: 'assets/json_translations'),
       ],
       supportedLocales: const <Locale>[
         Locale('en'),
