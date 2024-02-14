@@ -4,16 +4,14 @@ A minimal [JSON](https://en.wikipedia.org/wiki/JSON) localization package for Fl
 
 Use a JSON file/object per language to represent key/value pairs for localizing your app.
 
-## Usage
+## Install
 
-See [example](example).
-
-### Install
-
-Add to your `pubspec.yaml`
+Add `json_localizations` and `flutter_localizations` as dependencies to your `pubspec.yaml`.
 
 ```yaml
 dependencies:
+  flutter_localizations:
+    sdk: flutter
   json_localizations:
 ```
 
@@ -32,27 +30,18 @@ The JSON file name must match exactly the combination of language and country co
 That is `Locale('en', 'US')` must have a corresponding `assetPath/en-US.json` file.
 
 
-##### Example JSON file
-
-```json
-{
-	"hello": "hello",
-	"bye": "bye",
-	"items": [ "one", "two", "three" ],
-	"count": 1
-}
-```
-
-> Tip: You can store any json type given a key, like a string, an array of strings, or a number
-
-### MaterialApp
+### Add `JsonLocalizationsDelegate` to `MaterialApp`
 
 Add `JsonLocalizationsDelegate` to `MaterialApp` and set `supportedLocales` using language/country codes.
 
 ```
 MaterialApp(
   localizationsDelegates: [
-    ... // global delegates
+    // delegate from flutter_localization
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    // delegate from json_localizations
     JsonLocalizationsDelegate('assets/json_translations'),
   ],
   supportedLocales: [
@@ -61,22 +50,6 @@ MaterialApp(
   ],
 }
 
-```
-
-### API
-
-Translate strings or a list of strings using `value`:
-
-```dart
-JsonLocalizations.of(context)?.value('hello')
-```
-
-We keep the API simple, but you can easily add an extension method to `String` like this:
-
-```dart
-extension LocalizedString on String {
-  String tr(BuildContext context) => JsonLocalizations.of(context)!.value(this);
-}
 ```
 
 ### Note on **iOS**
@@ -94,3 +67,45 @@ Example:
 	<string>nb</string>
 </array>
 ```
+
+
+## Format
+
+Example JSON file:
+
+```json
+{
+	"hello": "hello",
+	"bye": "bye",
+	"items": [ "one", "two", "three" ],
+	"count": 1
+}
+```
+
+> Tip: You can store any json type given a key, like a string, an array of strings, or a number
+
+### API
+
+Get a value for the current language using:
+
+```dart
+JsonLocalizations.of(context)?.value('hello')
+```
+
+We keep the API simple, but you could easily add an extension method to `String`:
+
+```dart
+extension LocalizedString on String {
+  String tr(BuildContext context) => JsonLocalizations.of(context)!.value(this);
+}
+```
+
+So you could write:
+
+```dart
+'hello'.tr(context)
+```
+
+## Example
+
+See [example](example).
