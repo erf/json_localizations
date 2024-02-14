@@ -1,6 +1,6 @@
 name: json_localizations
 description: A minimal JSON localization package built on LocalizationsDelegate.
-version: 0.5.0
+version: 0.6.0
 homepage: https://github.com/erf/json_localizations
 
 environment:
@@ -16,6 +16,3 @@ dev_dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_lints: ^3.0.1
-
-flutter:
-
